@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="../style/style.css">
 </head>
 <body>
-    
 <header>
     <h1>To-Do List.com</h1>
 </header>
+
+<?php session_start() ?>
 
 <main>

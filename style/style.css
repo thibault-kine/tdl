@@ -1,25 +1,10 @@
+:root {
+    --primary-grey: rgb(170, 170, 170);
+    --darker-grey: rgb(100, 100, 100);
+    --even-darker-grey: rgb(50, 50, 50);
+}
+
 * {
     margin: 0;
     padding: 0;
-}
-
-body {
-    min-height: 100%;
-}
-
-header, footer {
-    display: block;
-    width: 100%;
-    height: 6vh;
-    box-sizing: border-box;
-    background-color: #707070;
-    position: absolute;
-}
-
-header {
-    top: 0;
-}
-
-footer {
-    bottom: 0;
 }

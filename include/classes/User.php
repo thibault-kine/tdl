@@ -13,16 +13,20 @@ class User {
     public string $email;
     private int $rights;
 
-    public function __consruct(string $firstname, string $lastname, string $username, string $password, string $email, ?int $rights = 0) {
+    public function __consruct(string $firstname, string $lastname, string $username, string $password, string $password2, string $email, ?int $rights = 0) {
 
-        $this->firstname = $firstname;
-        $this->lastname = $lastname;
-        $this->username = $username;
-        $this->password = $password;
-        $this->email = $email;
-        $this->rights = $rights;
+        if($this->checkPassword($password, $password2)) {
+            
+            $this->firstname = $firstname;
+            $this->lastname = $lastname;
+            $this->username = $username;
+            $this->password = $password;
+            $this->email = $email;
+            $this->rights = $rights;
 
-        $this->register();
+            $this->register();
+        }
+        else echo "<p class='err-msg'>Les mots de passe ne correspondent pas</p>";
     }
 
 
@@ -120,5 +124,14 @@ class User {
         $stmt->bindValue(':id', $id);
 
         $stmt->execute();
+    }
+
+    public function checkPassword(string $password1, string $password2) {
+
+        if ($password1 == $password2) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
