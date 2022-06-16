@@ -23,14 +23,11 @@ class User {
             $this->password = $password;
             $this->email = $email;
             $this->rights = $rights;
-
-            $this->register();
         }
-        else echo "<p class='err-msg'>Les mots de passe ne correspondent pas</p>";
     }
 
 
-    private function register() {
+    public function register() {
 
         $db = new PDO(
             'mysql:host=localhost;dbname=tdl;charset=utf8',
@@ -40,18 +37,11 @@ class User {
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-        $query = 'INSERT INTO users (firstname, lastname, username, password, email, rights) VALUES (:firstname, :lastname, :username, :password, :email, :rights)';
-        $stmt = $db->prepare($query);
-        $stmt->bindValue(':firstname', $this->firstname);
-        $stmt->bindValue(':lastname', $this->lastname);
-        $stmt->bindValue(':username', $this->username);
-        $stmt->bindValue(':password', $this->password);
-        $stmt->bindValue(':email', $this->email);
-        $stmt->bindValue(':rights', $this->rights);
+        $sql = $db->exec("INSERT INTO users (firstname, lastname, username, password, email, rights) VALUES ('$this->firstname', '$this->lastname', '$this->username', '$this->password', '$this->email', '$this->rights')");
 
-        $stmt->execute();
-
-        $this->getIDFromDB();
+        if($sql) {
+            echo "<div class='success'>Inscription réussie !</div>";
+        }
     }
 
     private function getIDFromDB() {
